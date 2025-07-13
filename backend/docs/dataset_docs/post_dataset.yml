@@ -1,0 +1,32 @@
+tags:
+  - Datasets
+summary: Create a new dataset
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      required:
+        - name
+        - owner
+      properties:
+        name:
+          type: string
+          example: Sales Data 2023
+        owner:
+          type: string
+          example: John Doe
+        description:
+          type: string
+          example: Monthly sales and region analysis
+        tags:
+          type: array
+          items:
+            type: string
+          example: ["sales", "2023", "finance"]
+responses:
+  201:
+    description: Dataset created
+  500:
+    description: Internal server error

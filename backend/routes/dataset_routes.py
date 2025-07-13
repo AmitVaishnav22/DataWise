@@ -3,11 +3,12 @@ from services import dataset_service, quality_log_service
 from models.schemas import DatasetSchema
 from flasgger import swag_from
 
+
 bp = Blueprint('datasets', __name__)
 dataset_schema = DatasetSchema()
 
 @bp.route("/datasets", methods=["POST"])
-@swag_from(...)
+@swag_from("../docs/dataset_docs/post_dataset.yml")
 def create_dataset():
     try:
         data = dataset_schema.load(request.json)
@@ -17,7 +18,7 @@ def create_dataset():
         return jsonify({"error": str(e)}), 500
 
 @bp.route("/datasets", methods=["GET"])
-@swag_from(...)
+@swag_from("../docs/dataset_docs/get_datasets.yml")
 def list_datasets():
     try:
         filters = {}
@@ -35,7 +36,7 @@ def list_datasets():
         return jsonify({"error": str(e)}), 500
 
 @bp.route("/datasets/<id>", methods=["GET"])
-@swag_from(...)
+@swag_from("../docs/dataset_docs/get_dataset_by_id.yml")
 def get_dataset(id):
     try:
         dataset = dataset_service.get_dataset_by_id(id)
@@ -47,6 +48,7 @@ def get_dataset(id):
         return jsonify({"error": str(e)}), 500
 
 @bp.route("/datasets/<id>", methods=["PUT"])
+@swag_from("../docs/dataset_docs/put_dataset.yml")
 def update_dataset(id):
     try:
         data = request.json
@@ -56,6 +58,7 @@ def update_dataset(id):
         return jsonify({"error": str(e)}), 500
 
 @bp.route("/datasets/<id>", methods=["DELETE"])
+@swag_from("../docs/dataset_docs/delete_dataset.yml")
 def soft_delete(id):
     try:
         result = dataset_service.delete_dataset(id)

@@ -1,0 +1,14 @@
+tags:
+  - Datasets
+summary: Soft delete a dataset
+parameters:
+  - name: id
+    in: path
+    type: string
+    required: true
+    description: Dataset ID
+responses:
+  200:
+    description: Dataset soft deleted
+  500:
+    description: Internal server error

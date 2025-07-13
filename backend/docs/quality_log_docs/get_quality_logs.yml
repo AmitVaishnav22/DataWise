@@ -1,0 +1,31 @@
+tags:
+  - Quality Logs
+summary: Get quality logs for a dataset
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+    description: Dataset ID
+responses:
+  200:
+    description: List of quality logs
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+          dataset_id:
+            type: string
+          status:
+            type: string
+            enum: [PASS, FAIL]
+          details:
+            type: string
+          timestamp:
+            type: string
+            format: date-time
+  500:
+    description: Internal server error

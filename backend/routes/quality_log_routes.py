@@ -1,11 +1,14 @@
 from flask import Blueprint, request, jsonify
 from services import quality_log_service
 from models.schemas import QualityLogSchema
+from flasgger import swag_from
+
 
 quality_bp = Blueprint('quality_logs', __name__)
 quality_log_schema = QualityLogSchema()
 
 @quality_bp.route("/datasets/<id>/quality", methods=["POST"])
+@swag_from("../docs/quality_log_docs/post_quality_logs.yml")
 def add_quality_log(id):
     try:
         data = quality_log_schema.load(request.json)
@@ -15,6 +18,7 @@ def add_quality_log(id):
         return jsonify({"error": str(e)}), 500
 
 @quality_bp.route("/datasets/<id>/quality", methods=["GET"])
+@swag_from("../docs/quality_log_docs/get_quality_logs.yml")
 def get_quality_logs(id):
     try:
         logs = quality_log_service.get_quality_logs(id)

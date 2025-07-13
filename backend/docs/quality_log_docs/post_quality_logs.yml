@@ -1,0 +1,30 @@
+tags:
+  - Quality Logs
+summary: Add a quality log for a dataset
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+    description: Dataset ID
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      required:
+        - status
+        - details
+      properties:
+        status:
+          type: string
+          enum: [PASS, FAIL]
+          example: PASS
+        details:
+          type: string
+          example: All rows passed validation.
+responses:
+  201:
+    description: Quality log created
+  500:
+    description: Internal server error

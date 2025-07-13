@@ -1,0 +1,16 @@
+tags:
+  - Datasets
+summary: Get a dataset by ID
+parameters:
+  - name: id
+    in: path
+    type: string
+    required: true
+    description: Dataset ID
+responses:
+  200:
+    description: Dataset found
+  404:
+    description: Dataset not found
+  500:
+    description: Internal server error
